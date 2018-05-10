@@ -8,19 +8,16 @@ class system_users::admins {
     user { 'admin':
       group => 'staff',
     }
-  }
+  }  else {
+     package {
+       'csh':
+       ensure => latest,
+     }
 
-  else {
-    package {
-      'csh':
-      ensure => latest,
+    user { 'admin':
+      group   => 'staff',
+      shell   => '/bin/csh',
+      require => Package['csh'],
     }
-
-  user { 'admin':
-    group   => 'staff',
-    shell   => '/bin/csh',
-    require => Package['csh']
   }
-}
-
 }
