@@ -6,7 +6,7 @@ class system_users::admins {
 
   if $facts['kernel'] == 'windows' {
     user { 'admin':
-      groups => 'staff',
+      groups => ['staff','Users'],
     }
   } else {
     package { 'csh':
@@ -14,7 +14,7 @@ class system_users::admins {
     }
 
     user { 'admin':
-      groups   => 'staff',
+      groups  => 'staff',
       shell   => '/bin/csh',
       require => Package['csh'],
     }
